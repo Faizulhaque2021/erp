@@ -15,8 +15,8 @@ namespace erp.Domain.Models
         public string contact_no { get; set; }
         public string bill_no { get; set; }
         public string bill_date { get; set; }
-        public decimal amount { get; set; }
-        public decimal net_amount { get; set; }
+        public int amount { get; set; }
+        public int net_amount { get; set; }
         public string referance_no { get; set; }
         public string particular { get; set; }
 

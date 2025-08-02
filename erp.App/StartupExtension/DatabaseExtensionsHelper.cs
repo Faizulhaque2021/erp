@@ -10,9 +10,10 @@ namespace erp.App.StartupExtension
         {
             services.AddDbContext<ApplicationDbContext>(Opt =>
             {
-                Opt.UseSqlServer(configuration.GetConnectionString(name: "DefaultConnection"));
+                Opt.UseSqlServer(configuration.GetConnectionString(name: "DefaultConnection"), x => x.MigrationsAssembly("erp.App"));
 
             });
+
             return services;
         }
 
