@@ -6,42 +6,310 @@
     <title>@ViewData["Title"] - erp.App</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/erp.App.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/fontawesome.min.css" integrity="sha512-J2Gce+WmOttffHOrVKLTlzxIalPXUMDbSfn5ADqp8Vj9EngnjNHr+jjiL3ZB8muEzo+K51gU10X+0eGqGNL7QA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @* 
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/erp.App.styles.css" asp-append-version="true"/> 
+    *@
+    <style>
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            padding-top: 20px;
+        }
+
+            .sidebar .nav-link {
+                color: #333;
+            }
+
+                .sidebar .nav-link:hover {
+                    background: #fff6ee;
+                }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        @@media (max-width: 767.98px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">erp.App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="d-flex">
+        <!-- Sidebar: Only show if user is authenticated -->
+        <nav class="sidebar">
+            <div class="container-fluid">
+                <ul class="nav flex-column">
+                    <hr class="sidebar-divider my-0">
+                    <!-- Nav Item - Dashboard -->
+                    <br>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Index", "Home")">
+                            <i class="fas fa-fw fa-tachometer-alt" style="color:orange"></i>
+                            <span>DashBoard</span>
+                        </a>
+                    </li>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    <!-- Parties -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#entryMenu" role="button" aria-expanded="false" aria-controls="entryMenu">
+                            <i class="fa-solid fa-user-plus" style="color:orange; font-size:15px"></i>
+                            Parties
+                        </a>
+                        <div class="collapse" id="entryMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/Index"> Employee</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="entryMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Supplier</a>
+                                </li>
+                            </ul>
+                        </div>
+                        @* 
+                            <div class="collapse" id="entryMenu">
+                              <ul class="nav flex-column ms-3">
+                                  <li class="nav-item">
+                                     <a class="nav-link" asp-area="" asp-page="/Passport/List"> Import Parties</a>
+                                  </li>
+                              </ul>
+                          </div> 
+                        *@
+                    </li>
+                    <!-- Items -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#itemMenu" role="button" aria-expanded="false" aria-controls="itemMenu">
+                            <i class="fa-solid fa-box" style="color:orange"></i>
+                            Items
+                        </a>
+                        <div class="collapse" id="itemMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/Index"> Inventory</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="itemMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Warehouse</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="itemMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Unit</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="itemMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Category</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="itemMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Batch</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="itemMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Print Labes</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="itemMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Import Items</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- Sales -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#salesMenu" role="button" aria-expanded="false" aria-controls="salesMenu">
+                            <i class="fa-solid fa-cart-shopping" style="color:orange"></i>
+                            Issue
+                        </a>
+                        <div class="collapse" id="salesMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/Index"> Requisition Invoice</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="salesMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Requisition Order</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="salesMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Quatation / Estimate</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="salesMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List">POS</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="salesMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Payment In</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="salesMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Sales Return</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- Purchase -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#purchaseMenu" role="button" aria-expanded="false" aria-controls="#purchaseMenu">
+                            <i class="fa-solid fa-bag-shopping" style="color:orange"></i>
+                            Purchase
+                        </a>
+                        <div class="collapse" id="purchaseMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/Index"> Purchase Invoice</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="purchaseMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Payment Out</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="purchaseMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Purchase Return</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="purchaseMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Passport/List"> Purchase Order</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- Report Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#reportMenu" role="button" aria-expanded="false" aria-controls="reportMenu">
+                            <i class="fa-regular fa-file" style="color:orange"></i>
+                            Report
+                        </a>
+                        <div class="collapse" id="reportMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/ManageUsers">Daily</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/ManageRoles">Monthly</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- Settings Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#settingMenu" role="button" aria-expanded="false" aria-controls="settingMenu">
+                            <i class="fa-solid fa-gear" style="color:orange"></i>
+                            Settings
+                        </a>
+                        <div class="collapse" id="settingMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/ManageUsers">Company Profile</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- System Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#systemMenu" role="button" aria-expanded="false" aria-controls="systemMenu">
+                            <i class="fa-solid fa-user-group" style="color:orange"></i>
+                            User Management
+                        </a>
+                        <div class="collapse" id="systemMenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/ManageUsers">Manage Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Profile/ManageRoles">Manage Roles</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- Logout -->
+                    <li class="nav-item mt-3">
+                        <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+                            <button type="submit" class="nav-link btn btn-link">Logout</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </nav>
-    </header>
+
+
+        <!-- Main Content -->
+        <div class="main-content w-100">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - erp.App - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+  
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
